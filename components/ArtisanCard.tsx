@@ -6,6 +6,7 @@ import { ChevronRight, MapPin, Phone } from 'lucide-react-native';
 import React from 'react';
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Artisan, RootStackParamList } from '../types/types';
+import { GetProfessionIcon } from '@/services/service';
 
 type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
@@ -32,6 +33,8 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
         navigation.navigate('ArtisanDetail', { id: artisan.id });
     };
 
+    const Icon = GetProfessionIcon(artisan.metier);
+
     return (
         <TouchableOpacity
             onPress={goToProfile}
@@ -54,7 +57,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
                             ]}
                         >
                             <Text style={[styles.jobText, { color: theme.colors.jobBadgeText }]}>
-                                {artisan.metier}
+                                {artisan.metier} <Icon size={16} />
                             </Text>
 
 

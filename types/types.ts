@@ -1,3 +1,5 @@
+import { AirVent, Hammer, Leaf, PaintRoller, Settings, Wrench, Zap } from "lucide-react";
+
 export enum City {
   Casablanca = "Casablanca",
   Rabat = "Rabat",
@@ -16,6 +18,18 @@ export enum Profession {
   Gardener = "Jardinier",
   ACSpecialist = "Climatisation"
 }
+
+
+export const ProfessionIconMap = {
+  Plombier: Wrench,
+  Électricien: Zap,
+  Peintre: PaintRoller,
+  Menuisier: Hammer,
+  Mécanicien: Settings,
+  Jardinier: Leaf,
+  Climatisation: AirVent,
+};
+
 
 export interface Artisan {
   id: number;

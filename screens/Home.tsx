@@ -10,7 +10,6 @@ import CategoryPill from '../components/CategoryPill';
 import { City, Profession } from '../types/types';
 
 const Home: React.FC = () => {
-    // const theme = getTheme();
 
     const { isDarkMode } = useTheme();
     const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
