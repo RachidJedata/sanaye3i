@@ -5,8 +5,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 function HeaderTitle() {
-  const { isDarkMode, toggleDarkMode } = useTheme();
-  const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
+  const { isDarkMode, theme, toggleDarkMode } = useTheme();
 
   return (
     <View style={styles.headerRow}>
@@ -47,8 +46,7 @@ export default function RootLayout() {
 
 function CustomHeader() {
 
-  const { isDarkMode } = useTheme();
-  const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
+  const { theme } = useTheme();
 
   return (
     <SafeAreaView

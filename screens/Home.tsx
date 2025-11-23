@@ -1,6 +1,5 @@
 import { artisans, cities, professions } from '@/constants/data';
 import { useTheme } from '@/context/ThemeContext';
-import { MyDarkTheme, MyLightTheme } from '@/theme/theme';
 import { Picker } from '@react-native-picker/picker';
 import { MapPin, Search, X } from 'lucide-react-native';
 import React, { useMemo, useState } from 'react';
@@ -11,9 +10,7 @@ import { City, Profession } from '../types/types';
 
 const Home: React.FC = () => {
 
-    const { isDarkMode } = useTheme();
-    const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
-
+    const { theme } = useTheme();
 
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCity, setSelectedCity] = useState<City | ''>('');

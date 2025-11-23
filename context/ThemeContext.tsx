@@ -1,8 +1,10 @@
+import { MyDarkTheme, MyLightTheme } from '@/theme/theme';
 import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 
 // Define the shape of your context value
 interface ThemeContextValue {
     // Theme (you can expand for light/dark or color palette)
+    theme: typeof MyDarkTheme;
     isDarkMode: boolean;
     toggleDarkMode: () => void;
 
@@ -15,6 +17,7 @@ interface ThemeContextValue {
 
 // Create the context with default values
 const ThemeContext = createContext<ThemeContextValue>({
+    theme: MyLightTheme,
     isDarkMode: false,
     toggleDarkMode: () => { },
     favorites: [],
@@ -52,9 +55,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
         return favorites.includes(id);
     };
 
+    const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
+
     // Memoize value so context doesn’t cause unnecessary rerenders
     const value = useMemo<ThemeContextValue>(
         () => ({
+            theme,
             isDarkMode,
             toggleDarkMode,
             favorites,

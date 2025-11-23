@@ -1,5 +1,4 @@
 import { useTheme } from "@/context/ThemeContext";
-import { MyDarkTheme, MyLightTheme } from "@/theme/theme";
 import React from "react";
 import { StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle } from "react-native";
 
@@ -18,8 +17,7 @@ const CategoryPill: React.FC<CategoryPillProps> = ({
     style,
     textStyle,
 }) => {
-    const { isDarkMode } = useTheme();
-    const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
+    const { theme } = useTheme();
 
     return (
         <TouchableOpacity

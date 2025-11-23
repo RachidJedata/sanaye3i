@@ -1,12 +1,11 @@
 import { useTheme } from '@/context/ThemeContext';
-import { MyDarkTheme, MyLightTheme } from '@/theme/theme';
+import { GetProfessionIcon } from '@/services/service';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ChevronRight, MapPin, Phone } from 'lucide-react-native';
 import React from 'react';
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Artisan, RootStackParamList } from '../types/types';
-import { GetProfessionIcon } from '@/services/service';
 
 type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
@@ -17,8 +16,7 @@ interface ArtisanCardProps {
 const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
     const navigation = useNavigation<NavigationType>();
 
-    const { isDarkMode } = useTheme();
-    const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
+    const { theme } = useTheme();
 
     const handleCall = () => {
         const phoneNumber = `tel:${artisan.telephone}`;
