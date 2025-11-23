@@ -3,7 +3,7 @@ import { Heart } from 'lucide-react-native'; // use the React Native version of 
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import ArtisanCard from '../components/ArtisanCard'; // make sure this is a React Native component  
-import { artisans } from '../data';
+import { artisans } from '@/constants/data';
 
 const Favorites: React.FC = () => {
     const { favorites } = useTheme();

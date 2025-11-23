@@ -1,9 +1,7 @@
-// screens/ArtisanDetail.tsx
-
+import { Artisan, City, Profession, RootStackParamList } from '@/types/types';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Artisan, City, Profession, RootStackParamList } from '../constants/types';
 
 type DetailRoute = RouteProp<RootStackParamList, 'ArtisanDetail'>;
 

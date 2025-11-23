@@ -1,11 +1,12 @@
-import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { useTheme } from "@/context/ThemeContext";
+import { MyDarkTheme, MyLightTheme } from "@/theme/theme";
+import React from "react";
+import { StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle } from "react-native";
 
 interface CategoryPillProps {
     category: string;
     isSelected: boolean;
     onPress: () => void;
-    // Optional custom styles
     style?: ViewStyle;
     textStyle?: TextStyle;
 }
@@ -17,12 +18,22 @@ const CategoryPill: React.FC<CategoryPillProps> = ({
     style,
     textStyle,
 }) => {
+    const { isDarkMode } = useTheme();
+    const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
+
     return (
         <TouchableOpacity
             onPress={onPress}
             style={[
                 styles.pill,
-                isSelected ? styles.pillSelected : styles.pillUnselected,
+                {
+                    backgroundColor: isSelected
+                        ? theme.colors.pillSelected
+                        : theme.colors.pillUnselected,
+                    borderColor: isSelected
+                        ? theme.colors.pillSelected
+                        : theme.colors.pillBorder,
+                },
                 style,
             ]}
             activeOpacity={0.7}
@@ -30,7 +41,9 @@ const CategoryPill: React.FC<CategoryPillProps> = ({
             <Text
                 style={[
                     styles.text,
-                    isSelected ? styles.textSelected : styles.textUnselected,
+                    {
+                        color: isSelected ? theme.colors.pillText : theme.colors.pillTextUnselected,
+                    },
                     textStyle,
                 ]}
             >
@@ -46,27 +59,13 @@ const styles = StyleSheet.create({
     pill: {
         paddingVertical: 8,
         paddingHorizontal: 16,
-        borderRadius: 20,            // makes it pill-shaped
+        borderRadius: 20,
         borderWidth: 1,
         marginHorizontal: 4,
         marginVertical: 4,
     },
-    pillSelected: {
-        backgroundColor: '#2563EB',  // blue-600-ish
-        borderColor: '#2563EB',
-    },
-    pillUnselected: {
-        backgroundColor: '#F3F4F6',  // gray-100-ish
-        borderColor: '#D1D5DB',      // gray-300-ish
-    },
     text: {
         fontSize: 14,
-        fontWeight: '500',
-    },
-    textSelected: {
-        color: 'white',
-    },
-    textUnselected: {
-        color: '#374151',             // gray-700-ish
+        fontWeight: "500",
     },
 });

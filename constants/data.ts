@@ -1,4 +1,4 @@
-import { Artisan, City, Profession } from "./types";
+import { Artisan, City, Profession } from "../types/types";
 
 export const artisans: Artisan[] = [
   {
