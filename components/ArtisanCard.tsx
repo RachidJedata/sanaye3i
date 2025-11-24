@@ -1,20 +1,17 @@
 import { useTheme } from '@/context/ThemeContext';
 import { getProfessionIcon } from '@/services/service';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ChevronRight, MapPin, Phone } from 'lucide-react-native';
 import React from 'react';
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Artisan, RootStackParamList } from '../types/types';
+import { Artisan } from '../types/types';
+import { router } from 'expo-router';
 
-type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
 interface ArtisanCardProps {
     artisan: Artisan;
 }
 
 const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
-    const navigation = useNavigation<NavigationType>();
 
     const { theme } = useTheme();
 
@@ -28,7 +25,14 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
     };
 
     const goToProfile = () => {
-        navigation.navigate('ArtisanDetail', { id: artisan.id });
+        // navigation.navigate('ArtisanDetail', { id: artisan.id });
+        // Assuming artisan.id is a number
+        const artisanId = artisan.id;
+
+        router.push({
+            pathname: "/[id]/ArtisanDetails", // The template path from your file system
+            params: { id: artisanId },      // Pass the dynamic value under the 'idx' key
+        });
     };
 
     const Icon = getProfessionIcon(artisan.metier);

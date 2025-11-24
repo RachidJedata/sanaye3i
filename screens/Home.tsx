@@ -62,7 +62,17 @@ const Home: React.FC = () => {
                         <Picker
                             selectedValue={selectedCity}
                             onValueChange={(itemValue) => setSelectedCity(itemValue as City)}
-                            style={[styles.picker, { color: theme.colors.text }]}
+                            style={[
+                                styles.picker,
+                                {
+                                    color: theme.colors.text,
+                                    backgroundColor: theme.colors.cardBackground,
+
+                                    borderColor: 'transparent',
+                                    borderWidth: 0,
+                                    borderStyle: undefined,
+                                }
+                            ]}
                             dropdownIconColor={theme.colors.text}
                         >
                             <Picker.Item label="Toutes les villes" value="" />

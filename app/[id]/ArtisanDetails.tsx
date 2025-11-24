@@ -1,17 +1,15 @@
-import { Artisan, City, Profession, RootStackParamList } from '@/types/types';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { Artisan, City, Profession } from '@/types/types';
+import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-type DetailRoute = RouteProp<RootStackParamList, 'ArtisanDetail'>;
 
 export default function ArtisanDetail() {
-    const route = useRoute<DetailRoute>();
-    const { id } = route.params;
+    const { id } = useLocalSearchParams();
 
     // Replace this with your API call
     const artisan: Artisan = {
-        id,
+        id: Number(id),
         nom: "Mechanic",
         metier: Profession.Mechanic,
         ville: City.Agadir,

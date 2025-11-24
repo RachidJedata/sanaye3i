@@ -42,8 +42,8 @@ export interface Artisan {
   available247?: boolean;
 }
 
-export type RootStackParamList = {
-  Home: undefined;
-  ArtisanDetail: { id: number };
-  // add others here...
-};
+// export type RootStackParamList = {
+//   Home: undefined;
+//   ArtisanDetail: { id: number };
+//   // add others here...
+// };
