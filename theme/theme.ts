@@ -39,7 +39,7 @@ export const MyDarkTheme = {
         headerText: "#f5f5f5",
         logoTint: "#ffffff",
         background: "#121212",
-        text: "#f5f5f5",
+        text: "#808080",
         border: "#333333",
         placeholder: "#999999",
         cardBackground: "#1e1e1e",
