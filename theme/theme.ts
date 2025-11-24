@@ -1,4 +1,3 @@
-import { useTheme } from "@/context/ThemeContext";
 import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 
 export const MyLightTheme = {
@@ -54,7 +53,7 @@ export const MyDarkTheme = {
         pillTextUnselected: "#aaacaeff",
 
 
-        textSecondary: "#6B7280",    
+        textSecondary: "#6B7280",
         iconSecondary: "#6B7280",
         jobBadgeBackground: "#DBEAFE",
         jobBadgeText: "#1E3A8A",
@@ -63,8 +62,3 @@ export const MyDarkTheme = {
         callButtonIcon: "#064E3B",
     },
 };
-
-export function getTheme() {
-    const { isDarkMode } = useTheme();
-    return isDarkMode ? MyDarkTheme : MyLightTheme;
-}

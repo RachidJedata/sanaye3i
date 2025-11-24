@@ -1,4 +1,4 @@
-import { AirVent, Hammer, Leaf, PaintRoller, Settings, Wrench, Zap } from "lucide-react";
+import { AirVent, Hammer, Leaf, PaintRoller, Settings, Wrench, Zap } from "lucide-react-native";
 
 export enum City {
   Casablanca = "Casablanca",

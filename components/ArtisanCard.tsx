@@ -1,5 +1,5 @@
 import { useTheme } from '@/context/ThemeContext';
-import { GetProfessionIcon } from '@/services/service';
+import { getProfessionIcon } from '@/services/service';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ChevronRight, MapPin, Phone } from 'lucide-react-native';
@@ -31,7 +31,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
         navigation.navigate('ArtisanDetail', { id: artisan.id });
     };
 
-    const Icon = GetProfessionIcon(artisan.metier);
+    const Icon = getProfessionIcon(artisan.metier);
 
     return (
         <TouchableOpacity
@@ -54,9 +54,13 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
                                 },
                             ]}
                         >
-                            <Text style={[styles.jobText, { color: theme.colors.jobBadgeText }]}>
-                                {artisan.metier} <Icon size={16} />
-                            </Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 7 }}>
+                                <Icon size={16} />
+                                <Text style={[styles.jobText, { color: theme.colors.jobBadgeText }]}>
+                                    {artisan.metier}
+                                </Text>
+
+                            </View>
 
 
                         </View>
