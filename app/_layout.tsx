@@ -1,6 +1,6 @@
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
-import { MyDarkTheme, MyLightTheme } from "@/theme/theme";
 import { Stack } from "expo-router";
+import { Moon, Sun } from "lucide-react-native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -25,7 +25,7 @@ function HeaderTitle() {
       {/* Right Section: Toggle Button */}
       <TouchableOpacity onPress={toggleDarkMode} style={styles.toggleBtn}>
         <Text style={{ color: theme.colors.headerText, fontSize: 20 }}>
-          {!isDarkMode ? "🌙" : "☀️"}
+          {!isDarkMode ? <Moon /> : <Sun color={theme.colors.text} />}
         </Text>
       </TouchableOpacity>
     </View>
