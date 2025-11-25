@@ -59,6 +59,6 @@ export const MyDarkTheme = {
         jobBadgeText: "#1E3A8A",
         callButtonBg: "#DCFCE7",
         callButtonText: "#064E3B",
-        callButtonIcon: "#064E3B",
+        callButtonIcon: "#38e2b5ff",
     },
 };

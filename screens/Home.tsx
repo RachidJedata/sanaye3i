@@ -10,11 +10,12 @@ import { City, Profession } from '../types/types';
 
 const Home: React.FC = () => {
 
-    const { theme } = useTheme();
+    const { theme, isFavorite } = useTheme();
 
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCity, setSelectedCity] = useState<City | ''>('');
     const [selectedCategory, setSelectedCategory] = useState<Profession | null>(null);
+    const [isFavoritesFilterActive, setIsFavoritesFilterActive] = useState(false);
 
     const filteredArtisans = useMemo(() => {
         return artisans.filter((artisan) => {
@@ -25,9 +26,15 @@ const Home: React.FC = () => {
             const matchesCity = selectedCity ? artisan.ville === selectedCity : true;
             const matchesCategory = selectedCategory ? artisan.metier === selectedCategory : true;
 
-            return matchesSearch && matchesCity && matchesCategory;
+            // return matchesSearch && matchesCity && matchesCategory;
+
+            const matchesFavorites = isFavoritesFilterActive
+                ? isFavorite(artisan.id)
+                : true;
+
+            return matchesSearch && matchesCity && matchesCategory && matchesFavorites;
         });
-    }, [searchQuery, selectedCity, selectedCategory]);
+    }, [searchQuery, selectedCity, selectedCategory, isFavoritesFilterActive]);
 
     const toggleCategory = (cat: Profession) => {
         setSelectedCategory(selectedCategory === cat ? null : cat);
