@@ -37,7 +37,7 @@ export const MyDarkTheme = {
         ...DarkTheme.colors,
         headerBackground: "#1a1a1a",
         headerText: "#f5f5f5",
-        logoTint: "#ffffff",
+        logoTint: "#000000",
         background: "#121212",
         text: "#808080",
         border: "#333333",

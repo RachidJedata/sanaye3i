@@ -1,84 +1,75 @@
+import React, { createContext, ReactNode, useContext, useMemo, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MyDarkTheme, MyLightTheme } from '@/theme/theme';
-import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 
-// Define the shape of your context value
 interface ThemeContextValue {
-    // Theme (you can expand for light/dark or color palette)
     theme: typeof MyDarkTheme;
     isDarkMode: boolean;
     toggleDarkMode: () => void;
 
-    // Favorites logic
-    favorites: number[]; // assuming artisan.id is number
+    favorites: number[];
     addFavorite: (id: number) => void;
     removeFavorite: (id: number) => void;
+    toggleFavorite: (id: number) => void;
     isFavorite: (id: number) => boolean;
 }
 
-// Create the context with default values
-const ThemeContext = createContext<ThemeContextValue>({
-    theme: MyLightTheme,
-    isDarkMode: false,
-    toggleDarkMode: () => { },
-    favorites: [],
-    addFavorite: () => { },
-    removeFavorite: () => { },
-    isFavorite: () => false,
-});
+const FAVORITES_KEY = '@favorites';
 
-// Provider component
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    // Theme state
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
-
-    const toggleDarkMode = () => {
-        setIsDarkMode((prev) => !prev);
-    };
-
-    // Favorites state
     const [favorites, setFavorites] = useState<number[]>([]);
 
-    const addFavorite = (id: number) => {
-        setFavorites((current) => {
-            if (!current.includes(id)) {
-                return [...current, id];
+    // Load favorites from AsyncStorage on mount
+    useEffect(() => {
+        (async () => {
+            try {
+                const jsonValue = await AsyncStorage.getItem(FAVORITES_KEY);
+                if (jsonValue) setFavorites(JSON.parse(jsonValue));
+            } catch (e) {
+                console.error('Failed to load favorites', e);
             }
-            return current;
-        });
-    };
+        })();
+    }, []);
 
-    const removeFavorite = (id: number) => {
-        setFavorites((current) => current.filter((fav) => fav !== id));
-    };
+    // Save favorites whenever it changes
+    useEffect(() => {
+        (async () => {
+            try {
+                await AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+            } catch (e) {
+                console.error('Failed to save favorites', e);
+            }
+        })();
+    }, [favorites]);
 
-    const isFavorite = (id: number) => {
-        return favorites.includes(id);
-    };
+    const toggleDarkMode = () => setIsDarkMode(prev => !prev);
+
+    const addFavorite = (id: number) => setFavorites(prev => (prev.includes(id) ? prev : [...prev, id]));
+    const removeFavorite = (id: number) => setFavorites(prev => prev.filter(f => f !== id));
+    const toggleFavorite = (id: number) => setFavorites(prev => (prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]));
+    const isFavorite = (id: number) => favorites.includes(id);
 
     const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
 
-    // Memoize value so context doesn’t cause unnecessary rerenders
-    const value = useMemo<ThemeContextValue>(
-        () => ({
-            theme,
-            isDarkMode,
-            toggleDarkMode,
-            favorites,
-            addFavorite,
-            removeFavorite,
-            isFavorite,
-        }),
-        [isDarkMode, favorites]
-    );
+    const value = useMemo(() => ({
+        theme,
+        isDarkMode,
+        toggleDarkMode,
+        favorites,
+        addFavorite,
+        removeFavorite,
+        toggleFavorite,
+        isFavorite,
+    }), [theme, isDarkMode, favorites]);
 
-    return (
-        <ThemeContext.Provider value={value}>
-            {children}
-        </ThemeContext.Provider>
-    );
+    return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };
 
-// Custom hook to use in your components
-export const useTheme = () => {
-    return useContext(ThemeContext);
+export const useTheme = (): ThemeContextValue => {
+    const context = useContext(ThemeContext);
+    if (!context) throw new Error('useTheme must be used within a ThemeProvider');
+    return context;
 };

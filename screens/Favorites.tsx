@@ -1,9 +1,9 @@
+import { artisans } from '@/constants/data';
 import { useTheme } from '@/context/ThemeContext';
 import { Heart } from 'lucide-react-native'; // use the React Native version of Lucide :contentReference[oaicite:0]{index=0}  
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import ArtisanCard from '../components/ArtisanCard'; // make sure this is a React Native component  
-import { artisans } from '@/constants/data';
 
 const Favorites: React.FC = () => {
     const { favorites } = useTheme();
@@ -34,7 +34,7 @@ const Favorites: React.FC = () => {
                     </View>
                     <Text style={styles.emptyTitle}>Aucun favori pour le moment</Text>
                     <Text style={styles.emptyText}>
-                        Appuyez sur le cœur sur la fiche d'un artisan pour l'ajouter à votre liste.
+                        "Appuyez sur le cœur sur la fiche d'un artisan pour l'ajouter à votre liste."
                     </Text>
                 </View>
             )}

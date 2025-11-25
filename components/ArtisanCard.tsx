@@ -1,41 +1,40 @@
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Linking, Share } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ChevronRight, MapPin, Phone, Heart as HeartIcon } from 'lucide-react-native';
 import { useTheme } from '@/context/ThemeContext';
 import { getProfessionIcon } from '@/services/service';
-import { ChevronRight, MapPin, Phone } from 'lucide-react-native';
-import React from 'react';
-import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Artisan } from '../types/types';
-import { router } from 'expo-router';
+import { Artisan, RootStackParamList } from '../types/types';
 
+type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
 interface ArtisanCardProps {
     artisan: Artisan;
 }
 
 const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
+    const navigation = useNavigation<NavigationType>();
+    const { theme, toggleFavorite, isFavorite } = useTheme();
 
-    const { theme } = useTheme();
+    const Icon = getProfessionIcon(artisan.metier);
 
     const handleCall = () => {
         const phoneNumber = `tel:${artisan.telephone}`;
         Linking.canOpenURL(phoneNumber)
-            .then((supported) => {
-                if (supported) Linking.openURL(phoneNumber);
-            })
-            .catch((err) => console.error(err));
+            .then(supported => supported && Linking.openURL(phoneNumber))
+            .catch(err => console.error(err));
     };
 
     const goToProfile = () => {
-        // navigation.navigate('ArtisanDetail', { id: artisan.id });
-        // Assuming artisan.id is a number
-        const artisanId = artisan.id;
-
-        router.push({
-            pathname: "/[id]/ArtisanDetails", // The template path from your file system
-            params: { id: artisanId },      // Pass the dynamic value under the 'idx' key
-        });
+        navigation.navigate('ArtisanDetail', { id: artisan.id });
     };
 
-    const Icon = getProfessionIcon(artisan.metier);
+    const handleShare = (e: any) => {
+        e.stopPropagation();
+        const message = `Artisan: ${artisan.nom}\nMétier: ${artisan.metier}\nTél: ${artisan.telephone}`;
+        Share.share({ message });
+    };
 
     return (
         <TouchableOpacity
@@ -49,24 +48,11 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
                             {artisan.nom}
                         </Text>
 
-                        <View
-                            style={[
-                                styles.jobBadge,
-                                {
-                                    backgroundColor: theme.colors.jobBadgeBackground,
-                                    borderRadius: 50
-                                },
-                            ]}
-                        >
-                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 7 }}>
+                        <View style={[styles.jobBadge, { backgroundColor: theme.colors.jobBadgeBackground }]}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
                                 <Icon size={16} />
-                                <Text style={[styles.jobText, { color: theme.colors.jobBadgeText }]}>
-                                    {artisan.metier}
-                                </Text>
-
+                                <Text style={[styles.jobText, { color: theme.colors.jobBadgeText }]}>{artisan.metier}</Text>
                             </View>
-
-
                         </View>
                     </View>
 
@@ -78,20 +64,46 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
                     </View>
 
                     <View style={styles.actions}>
+                        {/* Call button */}
                         <TouchableOpacity
                             style={[styles.callButton, { backgroundColor: theme.colors.callButtonBg }]}
                             onPress={handleCall}
                         >
                             <Phone color={theme.colors.callButtonIcon} size={16} style={{ marginRight: 4 }} />
+                            <Text style={[styles.callText, { color: theme.colors.callButtonText }]}>Appeler</Text>
+                        </TouchableOpacity>
+
+                        {/* Favorite button */}
+                        <TouchableOpacity
+                            style={[styles.favoriteButton, { backgroundColor: theme.colors.callButtonBg }]}
+                            onPress={(e) => { e.stopPropagation(); toggleFavorite(artisan.id); }}
+                        >
+                            <HeartIcon
+                                color={isFavorite(artisan.id) ? '#DC2626' : theme.colors.callButtonIcon}
+                                size={16}
+                                style={{ marginRight: 4 }}
+                            />
                             <Text style={[styles.callText, { color: theme.colors.callButtonText }]}>
-                                Appeler
+                                {isFavorite(artisan.id) ? 'Favori' : 'Ajouter'}
                             </Text>
                         </TouchableOpacity>
 
-                        <View style={styles.profileLink}>
+                        {/* Share button */}
+                        <TouchableOpacity
+                            style={[styles.shareButton, { backgroundColor: theme.colors.callButtonBg }]}
+                            onPress={handleShare}
+                        >
+                            <Text style={[styles.callText, { color: theme.colors.callButtonText }]}>Partager</Text>
+                        </TouchableOpacity>
+
+                        {/* Voir profil link */}
+                        <TouchableOpacity
+                            style={styles.profileLink}
+                            onPress={(e) => { e.stopPropagation(); goToProfile(); }}
+                        >
                             <Text style={[styles.profileText, { color: theme.colors.link }]}>Voir profil</Text>
                             <ChevronRight color={theme.colors.link} size={16} />
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -120,8 +132,10 @@ const styles = StyleSheet.create({
     jobText: { fontSize: 12, fontWeight: '600' },
     locationRow: { flexDirection: 'row', alignItems: 'center', marginTop: 4 },
     locationText: { fontSize: 14 },
-    actions: { flexDirection: 'row', marginTop: 12, alignItems: 'center' },
+    actions: { flexDirection: 'row', marginTop: 12, alignItems: 'center', flexWrap: 'wrap', gap: 8 },
     callButton: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12 },
+    favoriteButton: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12 },
+    shareButton: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12 },
     callText: { fontSize: 14, fontWeight: '500' },
     profileLink: { flexDirection: 'row', alignItems: 'center', marginLeft: 16 },
     profileText: { fontSize: 14, fontWeight: '500', marginRight: 4 },

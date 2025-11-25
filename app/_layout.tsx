@@ -13,7 +13,7 @@ function HeaderTitle() {
       <View style={styles.leftSection}>
         <Image
           source={require("../assets/images/icon.png")}
-          style={[styles.logo, { tintColor: theme.colors.logoTint }]}
+          style={[styles.logo]}
           resizeMode="contain"
         />
 

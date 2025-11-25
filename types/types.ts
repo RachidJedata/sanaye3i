@@ -1,4 +1,9 @@
 import { AirVent, Hammer, Leaf, PaintRoller, Settings, Wrench, Zap } from "lucide-react-native";
+export type RootStackParamList = {
+  Home: undefined;
+  ArtisanDetail: { id: number };
+  // add any other screens you have
+};
 
 export enum City {
   Casablanca = "Casablanca",
