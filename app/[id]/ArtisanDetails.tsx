@@ -1,11 +1,10 @@
-import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '@/context/ThemeContext';
+import { getArtisan, getProfessionIcon } from '@/services/service';
+import { Artisan, RootStackParamList } from '@/types/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useTheme } from '@/context/ThemeContext';
-import { getArtisan, getProfessionIcon } from '@/services/service';
-import { Artisan, RootStackParamList } from '@/types/types';
 
 type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
@@ -75,7 +74,7 @@ export default function ArtisanDetail() {
                 />
             </View>
 
-            <View style={styles.actions}>
+            {/* <View style={styles.actions}>
                 <TouchableOpacity
                     style={[styles.button, { backgroundColor: theme.colors.buttonPrimary }]}
                     onPress={handleCall}
@@ -84,7 +83,7 @@ export default function ArtisanDetail() {
                         Call
                     </Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </ScrollView>
     );
 }
