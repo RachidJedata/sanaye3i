@@ -5,7 +5,7 @@ import { artisans } from '@/constants/data';
 import ArtisanCard from '@/components/ArtisanCard';
 
 const FavoritesScreen: React.FC = () => {
-    const { favorites } = useTheme();
+    const { favorites } = useTheme(); // ✅ Automatically triggers rerender when favorites change
 
     const favArtisans = artisans.filter(a => favorites.includes(a.id));
 
@@ -14,13 +14,16 @@ const FavoritesScreen: React.FC = () => {
             <Text style={styles.header}>❤️ Mes Favoris</Text>
 
             {favArtisans.length === 0 ? (
-                <Text style={styles.emptyText}>Aucun favori pour le moment</Text>
+                <View style={styles.empty}>
+                    <Text style={styles.emptyText}>Aucun favori pour le moment</Text>
+                </View>
             ) : (
                 <FlatList
                     data={favArtisans}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) => <ArtisanCard artisan={item} />}
                     contentContainerStyle={{ paddingBottom: 20 }}
+                    extraData={favorites} // ✅ ensures FlatList updates when favorites change
                 />
             )}
         </SafeAreaView>
@@ -30,7 +33,8 @@ const FavoritesScreen: React.FC = () => {
 export default FavoritesScreen;
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16 },
+    container: { flex: 1, padding: 16, backgroundColor: '#fff' },
     header: { fontSize: 26, fontWeight: 'bold', marginBottom: 16 },
-    emptyText: { textAlign: 'center', fontSize: 16, color: '#666', marginTop: 40 },
+    empty: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+    emptyText: { fontSize: 16, color: '#666', marginTop: 40, textAlign: 'center' },
 });
