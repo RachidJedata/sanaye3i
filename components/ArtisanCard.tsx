@@ -1,16 +1,10 @@
 import { useTheme } from '@/context/ThemeContext';
 import { getProfessionIcon } from '@/services/service';
-<<<<<<< HEAD
-import { Artisan, RootStackParamList } from '../types/types';
-import { Share2 } from 'lucide-react-native'; // or Share
-
-=======
 import { router } from 'expo-router';
-import { ChevronRight, Heart as HeartIcon, MapPin, Phone } from 'lucide-react-native';
+import { ChevronRight, Heart, MapPin, Phone, Share2 } from 'lucide-react-native';
 import React from 'react';
 import { Linking, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Artisan } from '../types/types';
->>>>>>> ca3bcb6845c848eb96a7cd77ec047c326cb924a8
 
 
 interface ArtisanCardProps {
@@ -86,11 +80,13 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
                             style={[styles.favoriteButton]}
                             onPress={(e) => { e.stopPropagation(); toggleFavorite(artisan.id); }}
                         >
-                        
-                            <Text style={{ fontSize: 18, color: isFavorite(artisan.id) ? 'red' : '#999' }}>
-                                ❤️
-                            </Text>
-                        
+
+                            <Heart
+                                size={20}
+                                color={isFavorite(artisan.id) ? "red" : "#e53030ff"}
+                                fill={isFavorite(artisan.id) ? "red" : "none"}
+                            />
+
                         </TouchableOpacity>
 
                         {/* Share button */}
