@@ -6,6 +6,8 @@ import { ChevronRight, MapPin, Phone, Heart as HeartIcon } from 'lucide-react-na
 import { useTheme } from '@/context/ThemeContext';
 import { getProfessionIcon } from '@/services/service';
 import { Artisan, RootStackParamList } from '../types/types';
+import { Share2 } from 'lucide-react-native'; // or Share
+
 
 type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
@@ -70,22 +72,18 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
                             onPress={handleCall}
                         >
                             <Phone color={theme.colors.callButtonIcon} size={16} style={{ marginRight: 4 }} />
-                            <Text style={[styles.callText, { color: theme.colors.callButtonText }]}>Appeler</Text>
                         </TouchableOpacity>
 
                         {/* Favorite button */}
                         <TouchableOpacity
-                            style={[styles.favoriteButton, { backgroundColor: theme.colors.callButtonBg }]}
+                            style={[styles.favoriteButton]}
                             onPress={(e) => { e.stopPropagation(); toggleFavorite(artisan.id); }}
                         >
-                            <HeartIcon
-                                color={isFavorite(artisan.id) ? '#DC2626' : theme.colors.callButtonIcon}
-                                size={16}
-                                style={{ marginRight: 4 }}
-                            />
-                            <Text style={[styles.callText, { color: theme.colors.callButtonText }]}>
-                                {isFavorite(artisan.id) ? 'Favori' : 'Ajouter'}
+                        
+                            <Text style={{ fontSize: 18, color: isFavorite(artisan.id) ? 'red' : '#999' }}>
+                                ❤️
                             </Text>
+                        
                         </TouchableOpacity>
 
                         {/* Share button */}
@@ -93,8 +91,9 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
                             style={[styles.shareButton, { backgroundColor: theme.colors.callButtonBg }]}
                             onPress={handleShare}
                         >
-                            <Text style={[styles.callText, { color: theme.colors.callButtonText }]}>Partager</Text>
+                            <Share2 color={theme.colors.callButtonIcon} size={16} style={{ marginRight: 4 }} />
                         </TouchableOpacity>
+
 
                         {/* Voir profil link */}
                         <TouchableOpacity
