@@ -1,18 +1,13 @@
-import { useTheme } from '@/context/ThemeContext';
-import { getArtisan, getProfessionIcon } from '@/services/service';
-import { Artisan } from '@/types/types';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import {
-    Linking,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from '@/context/ThemeContext';
+import { getArtisan, getProfessionIcon } from '@/services/service';
+import { Artisan, RootStackParamList } from '@/types/types';
 
-
+type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
 export default function ArtisanDetail() {
     const { id } = useLocalSearchParams();
@@ -22,28 +17,44 @@ export default function ArtisanDetail() {
 
     useEffect(() => {
         setArtisan(getArtisan(Number(id)));
-    }, []);
+    }, [id]);
 
-    if (!artisan) return <>Artisan Not Found</>
+    if (!artisan) {
+        return (
+            <View style={[styles.screen, { backgroundColor: theme.colors.background }]}>
+                <Text style={{ color: theme.colors.text }}>Artisan Not Found</Text>
+            </View>
+        );
+    }
 
     const handleCall = () => {
         Linking.openURL(`tel:${artisan.telephone}`);
     };
 
-    const Icon = getProfessionIcon(artisan.metier);
-
+    const ProfessionIcon = getProfessionIcon(artisan.metier);
 
     return (
         <ScrollView style={[styles.screen, { backgroundColor: theme.colors.background }]}>
             <View style={styles.header}>
                 <Text style={[styles.name, { color: theme.colors.text }]}>{artisan.nom}</Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                    <Icon size={16} />
-                    <Text style={[styles.job, { color: theme.colors.jobBadgeText }]}>{artisan.metier}</Text>
+
+                <View style={styles.jobRow}>
+                    <ProfessionIcon size={16} color={theme.colors.iconSecondary} />
+                    <Text style={[styles.job, { color: theme.colors.jobBadgeText, marginLeft: 6 }]}>
+                        {artisan.metier}
+                    </Text>
                 </View>
+
                 {artisan.available247 && (
-                    <View style={styles.badge}>
-                        <Text style={[styles.badgeText, { color: theme.colors.jobBadgeText }]}>24/7 Available</Text>
+                    <View
+                        style={[
+                            styles.badge,
+                            { backgroundColor: theme.colors.badgeAvailableBackground },
+                        ]}
+                    >
+                        <Text style={[styles.badgeText, { color: theme.colors.badgeAvailableText }]}>
+                            24/7 Available
+                        </Text>
                     </View>
                 )}
             </View>
@@ -65,8 +76,13 @@ export default function ArtisanDetail() {
             </View>
 
             <View style={styles.actions}>
-                <TouchableOpacity style={styles.button} onPress={handleCall}>
-                    <Text style={[styles.buttonText, { color: theme.colors.text }]}>Call</Text>
+                <TouchableOpacity
+                    style={[styles.button, { backgroundColor: theme.colors.buttonPrimary }]}
+                    onPress={handleCall}
+                >
+                    <Text style={[styles.buttonText, { color: theme.colors.buttonText }]}>
+                        Call
+                    </Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -86,20 +102,27 @@ function InfoRow({
     isLink?: boolean;
     multiline?: boolean;
 }) {
-    const Container: any = isLink ? TouchableOpacity : View;
     const { theme } = useTheme();
+    const Container = isLink ? TouchableOpacity : View;
 
     return (
         <Container
-            style={[styles.infoRow, { backgroundColor: theme.colors.background }, isLink && styles.infoRowLink]}
+            style={[
+                styles.infoRow,
+                { backgroundColor: theme.colors.cardBackground },
+                isLink && { borderColor: theme.colors.link, borderWidth: 1 },
+            ]}
             onPress={onPress}
-            activeOpacity={0.7}
+            activeOpacity={isLink ? 0.7 : 1}
         >
-            <Text style={styles.infoLabel}>{label}</Text>
+            <Text style={[styles.infoLabel, { color: theme.colors.textSecondary }]}>
+                {label}
+            </Text>
             <Text
                 style={[
                     styles.infoValue,
                     multiline && styles.infoValueMultiline,
+                    { color: theme.colors.text },
                 ]}
             >
                 {value}
@@ -111,74 +134,70 @@ function InfoRow({
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        padding: 16, // base spacing on 8pt grid
+        padding: 16,
     },
     header: {
         marginBottom: 32,
-        alignItems: "center",
+        alignItems: 'center',
     },
     name: {
         fontSize: 28,
-        fontWeight: "700",
+        fontWeight: '700',
+    },
+    jobRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 4,
     },
     job: {
         fontSize: 18,
-        marginTop: 4,
     },
     badge: {
         marginTop: 12,
-        backgroundColor: "#34D399",
         paddingHorizontal: 12,
         paddingVertical: 4,
         borderRadius: 12,
+        overflow: 'hidden',
     },
     badgeText: {
         fontSize: 12,
-        fontWeight: "600",
+        fontWeight: '600',
     },
     infoContainer: {
-        // spacing between cards
+        // optional spacing
     },
     infoRow: {
         padding: 16,
         borderRadius: 12,
         marginBottom: 16,
-        // shadow / elevation
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
         elevation: 3,
     },
-    infoRowLink: {
-        borderColor: "#2563EB",
-        borderWidth: 1,
-    },
     infoLabel: {
         fontSize: 14,
-        color: "#6B7280",
         marginBottom: 4,
     },
     infoValue: {
         fontSize: 16,
-        fontWeight: "600",
-        color: "#111827",
+        fontWeight: '600',
     },
     infoValueMultiline: {
         lineHeight: 22,
     },
     actions: {
         marginTop: 24,
-        alignItems: "center",
+        alignItems: 'center',
     },
     button: {
-        backgroundColor: "#2563EB",
         paddingVertical: 12,
         paddingHorizontal: 32,
         borderRadius: 24,
     },
     buttonText: {
         fontSize: 16,
-        fontWeight: "600",
+        fontWeight: '600',
     },
 });

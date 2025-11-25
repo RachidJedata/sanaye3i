@@ -1,5 +1,5 @@
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import { Moon, Sun } from "lucide-react-native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,21 +7,27 @@ import { SafeAreaView } from "react-native-safe-area-context";
 function HeaderTitle() {
   const { isDarkMode, theme, toggleDarkMode } = useTheme();
 
+  const goHome = () => {
+    router.push({
+      pathname: "/",
+    });
+  }
   return (
     <View style={styles.headerRow}>
       {/* Left Section: Logo + Title */}
-      <View style={styles.leftSection}>
-        <Image
-          source={require("../assets/images/icon.png")}
-          style={[styles.logo]}
-          resizeMode="contain"
-        />
+      <TouchableOpacity onPress={goHome} style={styles.leftSection}>
+        <View style={styles.leftSection}>
+          <Image
+            source={require("../assets/images/icon.png")}
+            style={[styles.logo]}
+            resizeMode="contain"
+          />
 
-        <Text style={[styles.title, { color: theme.colors.headerText }]}>
-          Sanaye3i
-        </Text>
-      </View>
-
+          <Text style={[styles.title, { color: theme.colors.headerText }]}>
+            Sanaye3i
+          </Text>
+        </View>
+      </TouchableOpacity>
       {/* Right Section: Toggle Button */}
       <TouchableOpacity onPress={toggleDarkMode} style={styles.toggleBtn}>
         <Text style={{ color: theme.colors.headerText, fontSize: 20 }}>

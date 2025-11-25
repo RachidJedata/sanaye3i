@@ -28,6 +28,17 @@ export const MyLightTheme = {
         callButtonBg: "#DCFCE7",
         callButtonText: "#064E3B",
         callButtonIcon: "#064E3B",
+
+        // Badges
+        badgeAvailableBackground: "#34D399", // green-400-ish
+        badgeAvailableText: "#FFFFFF",        // white text simple
+
+        // Buttons / Actions
+        buttonPrimary: "#2563EB",             // blue-600
+        buttonText: "#FFFFFF",                // white text on primary button
+
+        // Misc / Icons
+        iconPrimary: "#2563EB",                // maybe same as link or accent
     },
 };
 
@@ -60,5 +71,17 @@ export const MyDarkTheme = {
         callButtonBg: "#DCFCE7",
         callButtonText: "#064E3B",
         callButtonIcon: "#38e2b5ff",
+
+        // Badges
+        badgeAvailableBackground: "#10B981",       // green-500-ish
+        badgeAvailableText: "#FFFFFF",              // white text
+
+        // Buttons / Actions
+        buttonPrimary: "#3B82F6",                   // brighter blue for button
+        buttonText: "#FFFFFF",                       // white text
+
+
+        // Misc / Icons
+        iconPrimary: "#60A5FA",                       // same accent
     },
 };

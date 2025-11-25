@@ -10,7 +10,7 @@ import { City, Profession } from '../types/types';
 
 const Home: React.FC = () => {
 
-    const { theme, isFavorite } = useTheme();
+    const { theme, isFavorite, isReady } = useTheme();
 
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCity, setSelectedCity] = useState<City | ''>('');
@@ -37,6 +37,7 @@ const Home: React.FC = () => {
     const toggleCategory = (cat: Profession) => {
         setSelectedCategory(selectedCategory === cat ? null : cat);
     };
+
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
@@ -147,13 +148,14 @@ const Home: React.FC = () => {
                 </Text>
 
                 {filteredArtisans.length > 0 ? (
-                    <FlatList
+                    (isReady ? <FlatList
                         data={filteredArtisans}
                         keyExtractor={(item) => item.id.toString()}
                         renderItem={({ item }) => <ArtisanCard artisan={item} />}
                         ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
                         contentContainerStyle={{ paddingBottom: 20 }}
-                    />
+                    /> : <Text style={{ color: theme.colors.text, marginTop: 20 }}>Loading...</Text>)
+
                 ) : (
                     <View style={styles.noResults}>
                         <View

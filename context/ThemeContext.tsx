@@ -1,10 +1,11 @@
-import React, { createContext, ReactNode, useContext, useMemo, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MyDarkTheme, MyLightTheme } from '@/theme/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 
 interface ThemeContextValue {
     theme: typeof MyDarkTheme;
     isDarkMode: boolean;
+    isReady: boolean;
     toggleDarkMode: () => void;
 
     favorites: number[];
@@ -22,6 +23,8 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [favorites, setFavorites] = useState<number[]>([]);
 
+    const [isReady, setIsReady] = useState(false);
+
     // Load favorites from AsyncStorage on mount
     useEffect(() => {
         (async () => {
@@ -31,6 +34,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             } catch (e) {
                 console.error('Failed to load favorites', e);
             }
+            setIsReady(true);
         })();
     }, []);
 
@@ -55,6 +59,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const theme = isDarkMode ? MyDarkTheme : MyLightTheme;
 
     const value = useMemo(() => ({
+        isReady,
         theme,
         isDarkMode,
         toggleDarkMode,
