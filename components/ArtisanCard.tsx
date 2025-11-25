@@ -1,22 +1,23 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Linking, Share } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ChevronRight, MapPin, Phone, Heart as HeartIcon } from 'lucide-react-native';
 import { useTheme } from '@/context/ThemeContext';
 import { getProfessionIcon } from '@/services/service';
+<<<<<<< HEAD
 import { Artisan, RootStackParamList } from '../types/types';
 import { Share2 } from 'lucide-react-native'; // or Share
 
+=======
+import { router } from 'expo-router';
+import { ChevronRight, Heart as HeartIcon, MapPin, Phone } from 'lucide-react-native';
+import React from 'react';
+import { Linking, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Artisan } from '../types/types';
+>>>>>>> ca3bcb6845c848eb96a7cd77ec047c326cb924a8
 
-type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
 interface ArtisanCardProps {
     artisan: Artisan;
 }
 
 const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
-    const navigation = useNavigation<NavigationType>();
     const { theme, toggleFavorite, isFavorite } = useTheme();
 
     const Icon = getProfessionIcon(artisan.metier);
@@ -29,7 +30,13 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
     };
 
     const goToProfile = () => {
-        navigation.navigate('ArtisanDetail', { id: artisan.id });
+
+        const artisanId = artisan.id;
+
+        router.push({
+            pathname: "/[id]/ArtisanDetails",
+            params: { id: artisanId },
+        });
     };
 
     const handleShare = (e: any) => {

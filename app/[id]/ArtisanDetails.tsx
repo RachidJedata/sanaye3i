@@ -1,7 +1,8 @@
 import { useTheme } from '@/context/ThemeContext';
-import { Artisan, City, Profession } from '@/types/types';
+import { getArtisan, getProfessionIcon } from '@/services/service';
+import { Artisan } from '@/types/types';
 import { useLocalSearchParams } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Linking,
     ScrollView,
@@ -15,27 +16,29 @@ export default function ArtisanDetail() {
     const { id } = useLocalSearchParams();
     const { theme } = useTheme();
 
-    const artisan: Artisan = {
-        id: Number(id),
-        nom: "Mechanic",
-        metier: Profession.Mechanic,
-        ville: City.Agadir,
-        quartier: "Quartier",
-        telephone: "0601010101",
-        description:
-            "Experienced mechanic specializing in car repairs and diagnostics. Skilled in engine repair, brake systems, and preventive maintenance. Available around the clock for emergency services.",
-        available247: true,
-    };
+    const [artisan, setArtisan] = useState<Artisan | undefined>(undefined);
+
+    useEffect(() => {
+        setArtisan(getArtisan(Number(id)));
+    }, []);
+
+    if (!artisan) return <>Artisan Not Found</>
 
     const handleCall = () => {
         Linking.openURL(`tel:${artisan.telephone}`);
     };
 
+    const Icon = getProfessionIcon(artisan.metier);
+
+
     return (
         <ScrollView style={[styles.screen, { backgroundColor: theme.colors.background }]}>
             <View style={styles.header}>
                 <Text style={[styles.name, { color: theme.colors.text }]}>{artisan.nom}</Text>
-                <Text style={[styles.job, { color: theme.colors.jobBadgeText }]}>{artisan.metier}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                    <Icon size={16} />
+                    <Text style={[styles.job, { color: theme.colors.jobBadgeText }]}>{artisan.metier}</Text>
+                </View>
                 {artisan.available247 && (
                     <View style={styles.badge}>
                         <Text style={[styles.badgeText, { color: theme.colors.jobBadgeText }]}>24/7 Available</Text>
