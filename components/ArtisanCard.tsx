@@ -68,7 +68,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
                     <View style={styles.actions}>
                         {/* Call button */}
                         <TouchableOpacity
-                            style={[styles.callButton, { backgroundColor: theme.colors.callButtonBg }]}
+                            style={[styles.callButton]}
                             onPress={handleCall}
                         >
                             <Phone color={theme.colors.callButtonIcon} size={16} style={{ marginRight: 4 }} />
@@ -88,7 +88,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
 
                         {/* Share button */}
                         <TouchableOpacity
-                            style={[styles.shareButton, { backgroundColor: theme.colors.callButtonBg }]}
+                            style={[styles.shareButton]}
                             onPress={handleShare}
                         >
                             <Share2 color={theme.colors.callButtonIcon} size={16} style={{ marginRight: 4 }} />
