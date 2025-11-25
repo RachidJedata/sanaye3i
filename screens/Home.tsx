@@ -1,7 +1,7 @@
 import { artisans, cities, professions } from '@/constants/data';
 import { useTheme } from '@/context/ThemeContext';
 import { Picker } from '@react-native-picker/picker';
-import { MapPin, Search, X } from 'lucide-react-native';
+import { Heart, MapPin, Search, X } from 'lucide-react-native';
 import React, { useMemo, useState } from 'react';
 import { FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import ArtisanCard from '../components/ArtisanCard';
@@ -25,8 +25,6 @@ const Home: React.FC = () => {
 
             const matchesCity = selectedCity ? artisan.ville === selectedCity : true;
             const matchesCategory = selectedCategory ? artisan.metier === selectedCategory : true;
-
-            // return matchesSearch && matchesCity && matchesCategory;
 
             const matchesFavorites = isFavoritesFilterActive
                 ? isFavorite(artisan.id)
@@ -88,6 +86,25 @@ const Home: React.FC = () => {
                             ))}
                         </Picker>
                     </View>
+
+                    <TouchableOpacity
+                        style={[
+                            styles.favoritesButton,
+                            {
+                                backgroundColor: isFavoritesFilterActive
+                                    ? theme.colors.link // Use primary color when active
+                                    : theme.colors.cardBackground,
+                                borderColor: theme.colors.border
+                            }
+                        ]}
+                        onPress={() => setIsFavoritesFilterActive(prev => !prev)}
+                    >
+                        <Heart
+                            color={isFavoritesFilterActive ? '#FFFFFF' : theme.colors.placeholder}
+                            fill={isFavoritesFilterActive ? theme.colors.link : 'none'}
+                            size={22}
+                        />
+                    </TouchableOpacity>
 
                     {selectedCategory && (
                         <TouchableOpacity
@@ -184,7 +201,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
     },
     searchInput: { flex: 1, marginLeft: 8, height: 40 },
-    filterRow: { flexDirection: 'row', alignItems: 'center', marginTop: 12 },
+    filterRow: { flexDirection: 'row', alignItems: 'center', marginTop: 12, justifyContent: 'space-between', },
     pickerWrapper: { flex: 1, flexDirection: 'row', alignItems: 'center' },
     mapPinIcon: { marginRight: 8 },
     picker: { flex: 1, height: 53 },
@@ -196,6 +213,16 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginLeft: 8,
     },
+
+    favoritesButton: {
+        padding: 10,
+        borderRadius: 24,
+        borderWidth: 1,
+        marginLeft: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
     clearCategoryText: { fontSize: 14 },
 
     sectionTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 8 },
