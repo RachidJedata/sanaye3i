@@ -12,6 +12,8 @@ import {
     View,
 } from 'react-native';
 
+
+
 export default function ArtisanDetail() {
     const { id } = useLocalSearchParams();
     const { theme } = useTheme();

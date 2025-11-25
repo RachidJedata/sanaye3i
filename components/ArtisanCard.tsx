@@ -1,12 +1,10 @@
 import { useTheme } from '@/context/ThemeContext';
 import { getProfessionIcon } from '@/services/service';
 import { router } from 'expo-router';
-import { ChevronRight, Heart, MapPin, Phone, Share2 } from 'lucide-react-native';
+import { ChevronRight,  MapPin, Phone, Share2 } from 'lucide-react-native';
 import React from 'react';
 import { Linking, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Artisan } from '../types/types';
-
-
+import { Artisan, RootStackParamList } from '../types/types';
 
 interface ArtisanCardProps {
     artisan: Artisan;
@@ -81,6 +79,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({ artisan }) => {
                             onPress={(e) => { e.stopPropagation(); toggleFavorite(artisan.id); }}
                             style={styles.favoriteButton}
                         >
+
                         
                             <Text style={{ fontSize: 18, color: isFavorite(artisan.id) ? 'red' : '#999' }}>
                                 ❤️
