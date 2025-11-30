@@ -1,16 +1,18 @@
 // screens/ProductsScreen.tsx
 
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList} from 'react-native';
 import { useTheme } from '@/context/ThemeContext';
 import { products } from '@/constants/data';
 import ProductCard from '@/components/ProductCard';
-import { HomeProps } from '@/types/navigation'; // Vous devrez ajouter ce type
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const ProductsScreen: React.FC<HomeProps> = ({ navigation }) => {
+type ProductsScreenProps = NativeStackScreenProps<any, 'Products'>;
+
+const ProductsScreen: React.FC<ProductsScreenProps> = ({ navigation }) => {
     const { theme } = useTheme();
 
-    const renderProduct = ({ item }) => (
+    const renderProduct = ({ item }: { item: typeof products[0] }) => (
         <ProductCard 
             product={item} 
             onPress={() => {

@@ -1,7 +1,7 @@
 // components/ProductCard.tsx
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {LinearGradient } from 'expo-linear-gradient';
 import { Star, ArrowRight } from 'lucide-react-native';
 import { useTheme } from '@/context/ThemeContext';
 import { Product } from '@/types/types';
