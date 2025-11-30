@@ -34,7 +34,7 @@ const Favorites: React.FC = () => {
                     </View>
                     <Text style={styles.emptyTitle}>Aucun favori pour le moment</Text>
                     <Text style={styles.emptyText}>
-                        "Appuyez sur le cœur sur la fiche d'un artisan pour l'ajouter à votre liste."
+                        Appuyez sur le cœur sur la fiche dun artisan pour lajouter à votre liste.
                     </Text>
                 </View>
             )}
