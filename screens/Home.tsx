@@ -69,10 +69,6 @@ const Home: React.FC = () => {
                 
                 <TouchableOpacity
                     style={[styles.boutiqueButton, { backgroundColor: theme.colors.link }]}
-                    // --- CORRECTION ICI ---
-                    // Au lieu de navigation.navigate('Boutique')
-                    // On utilise le chemin du fichier. 
-                    // Si votre fichier boutique est à la racine de "app", c'est "/boutique"
                     onPress={() => router.push('/boutique')} 
                 >
                     <ShoppingBag color="white" size={20} style={{marginRight: 5}}/>

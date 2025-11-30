@@ -1,4 +1,4 @@
-import { Artisan, City, Profession , Product } from "../types/types";
+import { Artisan, City, Product, Profession } from "../types/types";
 
 export const artisans: Artisan[] = [
   {
@@ -9,7 +9,8 @@ export const artisans: Artisan[] = [
     quartier: "Maârif",
     telephone: "0612345678",
     description: "Spécialiste en fuites, installations sanitaires et chauffage. Disponible 24/7.",
-    available247: true
+    available247: true,
+    prix: 1500
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const artisans: Artisan[] = [
     ville: City.Rabat,
     quartier: "Agdal",
     telephone: "0698765432",
+    prix: 200,
     description: "Installation, réparation et mise aux normes de systèmes électriques pour particuliers.",
   },
   {
@@ -27,6 +29,7 @@ export const artisans: Artisan[] = [
     ville: City.Marrakech,
     quartier: "Gueliz",
     telephone: "0611223344",
+    prix: 300,
     description: "Peinture intérieure et extérieure, enduit, décoration et finitions soignées.",
   },
   {
@@ -37,6 +40,7 @@ export const artisans: Artisan[] = [
     quartier: "Ain Diab",
     telephone: "0655443322",
     description: "Menuiserie bois et aluminium, placards sur mesure et réparation de meubles.",
+    prix: 400,
   },
   {
     id: 5,
@@ -46,6 +50,7 @@ export const artisans: Artisan[] = [
     quartier: "Malabata",
     telephone: "0677889900",
     description: "Installation et entretien de climatiseurs. Service rapide en été.",
+    prix: 100,
   },
   {
     id: 6,
@@ -55,6 +60,7 @@ export const artisans: Artisan[] = [
     quartier: "Ville Nouvelle",
     telephone: "0622334455",
     description: "Mécanique générale auto, diagnostic électronique et vidange à domicile.",
+    prix: 330,
   },
   {
     id: 7,
@@ -64,6 +70,7 @@ export const artisans: Artisan[] = [
     quartier: "Souissi",
     telephone: "0644556677",
     description: "Entretien de jardins, taille de haies, plantation et systèmes d'arrosage.",
+    prix: 90,
   },
   {
     id: 8,
@@ -73,7 +80,8 @@ export const artisans: Artisan[] = [
     quartier: "Hivernage",
     telephone: "0688776655",
     description: "Plomberie d'urgence, débouchage canalisation et réparation chauffe-eau.",
-    available247: true
+    available247: true,
+    prix: 100,
   },
   {
     id: 9,
@@ -83,6 +91,7 @@ export const artisans: Artisan[] = [
     quartier: "Sidi Bernoussi",
     telephone: "0633221100",
     description: "Électricien expérimenté pour installations industrielles et domestiques.",
+    prix: 900,
   },
   {
     id: 10,
@@ -92,6 +101,7 @@ export const artisans: Artisan[] = [
     quartier: "Centre Ville",
     telephone: "0699887766",
     description: "Rénovation de façades et peinture décorative. Devis gratuit.",
+    prix: 100,
   },
   {
     id: 11,
@@ -101,6 +111,7 @@ export const artisans: Artisan[] = [
     quartier: "Medina",
     telephone: "0611122233",
     description: "Artisan menuisier traditionnel, portes sculptées et fenêtres.",
+    prix: 900,
   },
   {
     id: 12,
@@ -110,6 +121,7 @@ export const artisans: Artisan[] = [
     quartier: "Talborjt",
     telephone: "0655667788",
     description: "Réparation frigos et climatisation. Déplacement dans tout Agadir.",
+    prix: 990,
   },
   {
     id: 13,
@@ -119,6 +131,7 @@ export const artisans: Artisan[] = [
     quartier: "Derb Ghallef",
     telephone: "0622114433",
     description: "Spécialiste réparation motos et scooters. Pièces de rechange disponibles.",
+    prix: 320,
   },
   {
     id: 14,
@@ -128,6 +141,7 @@ export const artisans: Artisan[] = [
     quartier: "Palmeraie",
     telephone: "0677788899",
     description: "Création d'espaces verts, entretien de palmiers et gazon.",
+    prix: 290,
   },
   {
     id: 15,
@@ -137,6 +151,7 @@ export const artisans: Artisan[] = [
     quartier: "Hay Riad",
     telephone: "0600112233",
     description: "Plomberie de luxe, installation de salles de bain modernes.",
+    prix: 1200,
   },
   {
     id: 16,
@@ -146,6 +161,7 @@ export const artisans: Artisan[] = [
     quartier: "Sonaba",
     telephone: "0699001122",
     description: "Dépannage électrique rapide. Installation de caméras de surveillance.",
+    prix: 9900,
   },
   {
     id: 17,
@@ -155,6 +171,7 @@ export const artisans: Artisan[] = [
     quartier: "Bourgogne",
     telephone: "0644332211",
     description: "Papier peint, peinture à effet, stuc. Travail propre et rapide.",
+    prix: 100,
   },
   {
     id: 18,
@@ -164,6 +181,7 @@ export const artisans: Artisan[] = [
     quartier: "Océan",
     telephone: "0688990011",
     description: "Réparation de volets roulants et menuiserie aluminium.",
+    prix: 100,
   },
   {
     id: 19,
@@ -173,6 +191,7 @@ export const artisans: Artisan[] = [
     quartier: "Daoudiate",
     telephone: "0612312312",
     description: "Maintenance VMC et climatisation réversible.",
+    prix: 300,
   },
   {
     id: 20,
@@ -182,6 +201,7 @@ export const artisans: Artisan[] = [
     quartier: "Beni Makada",
     telephone: "0676543210",
     description: "Garagiste expert toutes marques. Diagnostic valise.",
+    prix: 300,
   },
   {
     id: 21,
@@ -191,6 +211,7 @@ export const artisans: Artisan[] = [
     quartier: "Californie",
     telephone: "0654321098",
     description: "Paysagiste, aménagement de terrasses et jardins.",
+    prix: 300,
   },
   {
     id: 22,
@@ -200,6 +221,7 @@ export const artisans: Artisan[] = [
     quartier: "Narjiss",
     telephone: "0611223399",
     description: "Recherche de fuite non destructive. Débouchage haute pression.",
+    prix: 200,
   },
   {
     id: 23,
@@ -209,6 +231,7 @@ export const artisans: Artisan[] = [
     quartier: "Massira",
     telephone: "0699887711",
     description: "Électricité bâtiment. Mise en conformité.",
+    prix: 400,
   },
   {
     id: 24,
@@ -218,6 +241,7 @@ export const artisans: Artisan[] = [
     quartier: "Hassan",
     telephone: "0622334411",
     description: "Peintre en bâtiment, ravalement de façade.",
+    prix: 20,
   },
   {
     id: 25,
@@ -227,6 +251,7 @@ export const artisans: Artisan[] = [
     quartier: "Charf",
     telephone: "0677889922",
     description: "Cuisines équipées sur mesure et dressings.",
+    prix: 15,
   },
   {
     id: 26,
@@ -235,6 +260,7 @@ export const artisans: Artisan[] = [
     ville: City.Casablanca,
     quartier: "Oulfa",
     telephone: "0633445566",
+    prix: 13,
     description: "Froid industriel et commercial. Contrats d'entretien.",
   },
   {
@@ -245,6 +271,7 @@ export const artisans: Artisan[] = [
     quartier: "Dakhla",
     telephone: "0612341234",
     description: "Pneumatiques, équilibrage et parallélisme.",
+    prix: 14,
   },
   {
     id: 28,
@@ -254,6 +281,7 @@ export const artisans: Artisan[] = [
     quartier: "Mesnana",
     telephone: "0698769876",
     description: "Installation sanitaire complète pour nouvelles constructions.",
+    prix: 23,
   },
   {
     id: 29,
@@ -263,6 +291,7 @@ export const artisans: Artisan[] = [
     quartier: "Sidi Moumen",
     telephone: "0655441122",
     description: "Dépannage coupure de courant. Éclairage LED.",
+    prix: 24,
   },
   {
     id: 30,
@@ -272,39 +301,40 @@ export const artisans: Artisan[] = [
     quartier: "Temara",
     telephone: "0666777888",
     description: "Nettoyage de jardins et évacuation des déchets verts.",
+    prix: 36,
   }
 ];
 
 // Produits des Artisans
 export const products: Product[] = [
-    { 
-        id: 1, 
-        artisanId: 9, // Aicha Slaoui (Peintre)
-        nom: "Tableau Tadelakt Ocre", 
-        prix: 850, 
-        description: "Peinture murale style Tadelakt, couleur ocre naturelle. Fait main.", 
-        imageUrl: '../assets/images/background_poterie.jpg', 
-        category: 'Décoration'
-    },
-    { 
-        id: 2, 
-        artisanId: 4, // Hassan El Fassi (Menuisier)
-        nom: "Chaise en Bois de Cèdre sculpté", 
-        prix: 1200, 
-        description: "Chaise traditionnelle en cèdre, sculptée à la main. Pièce unique.", 
-        imageUrl: '../assets/images/background_poterie.jpg', 
-        category: 'Meubles'
-    },
-    { 
-        id: 3, 
-        artisanId: 7, // Samira Jilali (Maçon/Carrelage)
-        nom: "Zellij Bleu et Blanc (1m²)", 
-        prix: 550, 
-        description: "Ensemble de carreaux de Zellij traditionnel (1m²), motifs géométriques bleus.", 
-        imageUrl: '../assets/images/background_poterie.jpg', 
-        category: 'Carrelage'
-    },
-    // Ajoutez plus de produits ici...
+  {
+    id: 1,
+    artisanId: 9, // Aicha Slaoui (Peintre)
+    nom: "Tableau Tadelakt Ocre",
+    prix: 850,
+    description: "Peinture murale style Tadelakt, couleur ocre naturelle. Fait main.",
+    imageUrl: '../assets/images/background_poterie.jpg',
+    category: 'Décoration'
+  },
+  {
+    id: 2,
+    artisanId: 4, // Hassan El Fassi (Menuisier)
+    nom: "Chaise en Bois de Cèdre sculpté",
+    prix: 1200,
+    description: "Chaise traditionnelle en cèdre, sculptée à la main. Pièce unique.",
+    imageUrl: '../assets/images/background_poterie.jpg',
+    category: 'Meubles'
+  },
+  {
+    id: 3,
+    artisanId: 7, // Samira Jilali (Maçon/Carrelage)
+    nom: "Zellij Bleu et Blanc (1m²)",
+    prix: 550,
+    description: "Ensemble de carreaux de Zellij traditionnel (1m²), motifs géométriques bleus.",
+    imageUrl: '../assets/images/background_poterie.jpg',
+    category: 'Carrelage'
+  },
+  // Ajoutez plus de produits ici...
 ];
 export const cities = Object.values(City);
 export const professions = Object.values(Profession);
