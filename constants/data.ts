@@ -1,4 +1,4 @@
-import { Artisan, City, Profession } from "../types/types";
+import { Artisan, City, Profession , Product } from "../types/types";
 
 export const artisans: Artisan[] = [
   {
@@ -275,5 +275,36 @@ export const artisans: Artisan[] = [
   }
 ];
 
+// Produits des Artisans
+export const products: Product[] = [
+    { 
+        id: 1, 
+        artisanId: 9, // Aicha Slaoui (Peintre)
+        nom: "Tableau Tadelakt Ocre", 
+        prix: 850, 
+        description: "Peinture murale style Tadelakt, couleur ocre naturelle. Fait main.", 
+        imageUrl: '../assets/images/background_poterie.jpg', 
+        category: 'Décoration'
+    },
+    { 
+        id: 2, 
+        artisanId: 4, // Hassan El Fassi (Menuisier)
+        nom: "Chaise en Bois de Cèdre sculpté", 
+        prix: 1200, 
+        description: "Chaise traditionnelle en cèdre, sculptée à la main. Pièce unique.", 
+        imageUrl: '../assets/images/background_poterie.jpg', 
+        category: 'Meubles'
+    },
+    { 
+        id: 3, 
+        artisanId: 7, // Samira Jilali (Maçon/Carrelage)
+        nom: "Zellij Bleu et Blanc (1m²)", 
+        prix: 550, 
+        description: "Ensemble de carreaux de Zellij traditionnel (1m²), motifs géométriques bleus.", 
+        imageUrl: '../assets/images/background_poterie.jpg', 
+        category: 'Carrelage'
+    },
+    // Ajoutez plus de produits ici...
+];
 export const cities = Object.values(City);
 export const professions = Object.values(Profession);
