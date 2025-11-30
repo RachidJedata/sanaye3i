@@ -1,6 +1,13 @@
+import React, { useRef } from "react";
+import {
+    Animated,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    ViewStyle,
+    TextStyle,
+} from "react-native";
 import { useTheme } from "@/context/ThemeContext";
-import React from "react";
-import { StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle } from "react-native";
 
 interface CategoryPillProps {
     category: string;
@@ -19,35 +26,62 @@ const CategoryPill: React.FC<CategoryPillProps> = ({
 }) => {
     const { theme } = useTheme();
 
+    // Animation scale
+    const scaleAnim = useRef(new Animated.Value(1)).current;
+
+    const animatePress = () => {
+        Animated.sequence([
+            Animated.spring(scaleAnim, {
+                toValue: 0.92,
+                speed: 30,
+                useNativeDriver: true,
+            }),
+            Animated.spring(scaleAnim, {
+                toValue: 1,
+                speed: 20,
+                useNativeDriver: true,
+            }),
+        ]).start();
+    };
+
+    const handlePress = () => {
+        animatePress();
+        onPress();
+    };
+
     return (
-        <TouchableOpacity
-            onPress={onPress}
-            style={[
-                styles.pill,
-                {
-                    backgroundColor: isSelected
-                        ? theme.colors.pillSelected
-                        : theme.colors.pillUnselected,
-                    borderColor: isSelected
-                        ? theme.colors.pillSelected
-                        : theme.colors.pillBorder,
-                },
-                style,
-            ]}
-            activeOpacity={0.7}
-        >
-            <Text
+        <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={handlePress}
                 style={[
-                    styles.text,
+                    styles.pill,
                     {
-                        color: isSelected ? theme.colors.pillText : theme.colors.pillTextUnselected,
+                        backgroundColor: isSelected
+                            ? theme.colors.pillSelected
+                            : theme.colors.pillUnselected,
+                        borderColor: isSelected
+                            ? theme.colors.pillSelected
+                            : theme.colors.pillBorder,
                     },
-                    textStyle,
+                    style,
                 ]}
             >
-                {category}
-            </Text>
-        </TouchableOpacity>
+                <Text
+                    style={[
+                        styles.text,
+                        {
+                            color: isSelected
+                                ? theme.colors.pillText
+                                : theme.colors.pillTextUnselected,
+                        },
+                        textStyle,
+                    ]}
+                >
+                    {category}
+                </Text>
+            </TouchableOpacity>
+        </Animated.View>
     );
 };
 
@@ -59,11 +93,16 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         borderRadius: 20,
         borderWidth: 1,
-        marginHorizontal: 4,
-        marginVertical: 4,
+        marginHorizontal: 6,
+        marginVertical: 6,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.08,
+        shadowRadius: 4,
+        elevation: 2,
     },
     text: {
         fontSize: 14,
-        fontWeight: "500",
+        fontWeight: "600",
     },
 });

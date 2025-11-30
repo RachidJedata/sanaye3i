@@ -3,6 +3,17 @@ import { View, Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
 import { useTheme } from '@/context/ThemeContext';
 import { artisans } from '@/constants/data';
 import ArtisanCard from '@/components/ArtisanCard';
+import DetailScreen from './DetailScreen';
+import Home from './Home';
+import BoutiqueScreen from './BoutiqueScreen';
+import ProfileScreen from './ProfileScreen';
+
+export {
+    Home,
+    DetailScreen,
+    BoutiqueScreen,
+    ProfileScreen,
+};
 
 const FavoritesScreen: React.FC = () => {
     const { favorites } = useTheme(); // ✅ Automatically triggers rerender when favorites change

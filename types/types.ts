@@ -47,8 +47,24 @@ export interface Artisan {
   available247?: boolean;
 }
 
+// types/types.ts (Ajouter ceci)
+
+
+// Nouveau type pour les produits
+export interface Product {
+  id: number;
+  rating?: number;
+  artisanId: number; // Lier le produit à un artisan existant
+  nom: string;
+  prix: number;
+  description: string;
+  imageUrl: string; // Chemin local ou URL
+  category: string; // ex: 'Poterie', 'Luminaires', 'Bois', 'Bijoux'
+}
+
 // export type RootStackParamList = {
 //   Home: undefined;
 //   ArtisanDetail: { id: number };
-//   // add others here...
+
 // };
+

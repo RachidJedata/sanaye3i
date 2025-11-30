@@ -18,13 +18,13 @@ function HeaderTitle() {
       <TouchableOpacity onPress={goHome} style={styles.leftSection}>
         <View style={styles.leftSection}>
           <Image
-            source={require("../assets/images/icon.png")}
+            source={require("../assets/images/OC1ODV0.jpg")}
             style={[styles.logo]}
             resizeMode="contain"
           />
 
           <Text style={[styles.title, { color: theme.colors.headerText }]}>
-            Sanaye3i
+           SaNaYe3i
           </Text>
         </View>
       </TouchableOpacity>
