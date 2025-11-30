@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 50,
         borderWidth: 4,
-        borderColor: '#000',
+        borderColor: '#A72703',
     },
     onlineIndicator: {
         position: 'absolute',
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#4CAF50',
         borderWidth: 2,
-        borderColor: '#A3D78A',
+        borderColor: '#fff',
     },
     name: {
         fontSize: 32,
