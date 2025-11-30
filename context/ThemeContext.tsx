@@ -34,8 +34,8 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             } catch (e) {
                 console.error('Failed to load favorites', e);
             }
-            setIsReady(true);
         })();
+        setIsReady(true);
     }, []);
 
     // Save favorites whenever it changes
