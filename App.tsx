@@ -11,7 +11,7 @@ import { ThemeProvider, useTheme } from './context/ThemeContext';
 // Importation des écrans
 import HomeScreen from './screens/Home';
 import DetailScreen from './screens/DetailScreen';
-import ProductsScreen from './screens/ProductsScreen'; // Nouveau !
+import ProductsScreen from './app/ProductsScreen'; // Nouveau !
 
 const HomeStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator(); // Nouveau !
@@ -75,7 +75,7 @@ const MainNavigator = () => {
                 options={{ title: "Services" }}
             />
             <Tab.Screen 
-                name="Boutique" 
+                name="Products" 
                 component={ProductsScreen} 
                 options={{ 
                     title: "Produits",

@@ -5,7 +5,7 @@ import { artisans } from '@/constants/data';
 import ArtisanCard from '@/components/ArtisanCard';
 import DetailScreen from './DetailScreen';
 import Home from './Home';
-import BoutiqueScreen from './BoutiqueScreen';
+import BoutiqueScreen from '../app/BoutiqueScreen';
 import ProfileScreen from './ProfileScreen';
 
 export {
