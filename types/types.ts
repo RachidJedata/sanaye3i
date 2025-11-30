@@ -45,6 +45,7 @@ export interface Artisan {
   telephone: string;
   description: string;
   available247?: boolean;
+  prix?: number;
 }
 
 // types/types.ts (Ajouter ceci)

@@ -4,6 +4,9 @@ import { Moon, Sun } from "lucide-react-native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+
+
+
 function HeaderTitle() {
   const { isDarkMode, theme, toggleDarkMode } = useTheme();
 
@@ -13,6 +16,7 @@ function HeaderTitle() {
     });
   }
   return (
+
     <View style={styles.headerRow}>
       {/* Left Section: Logo + Title */}
       <TouchableOpacity onPress={goHome} style={styles.leftSection}>
