@@ -72,7 +72,7 @@ const Home: React.FC = () => {
                     onPress={() => router.push('/boutique')} 
                 >
                     <ShoppingBag color="white" size={20} style={{marginRight: 5}}/>
-                    <Text style={styles.boutiqueButtonText}>Boutique</Text>
+                    <Text style={styles.boutiqueButtonText}>L7aNoT</Text>
                 </TouchableOpacity>
             </View>
 
