@@ -89,13 +89,13 @@ export default function ArtisanDetail() {
                         {/* Avatar Placeholder - In a real app, use artisan.image if available */}
                         <View style={styles.avatarContainer}>
                             <Image
-                                source={{ uri: 'https://via.placeholder.com/100' }} // Replace with artisan image
+                                source={require('../../assets/images/background_poterie.jpg')}
                                 style={styles.avatar}
                             />
                             <View style={styles.onlineIndicator} />
                         </View>
                         <Text style={[styles.name, { color: '#000' }]}>{artisan.nom}</Text>
-                        <View style={styles.jobRow}>
+                        <View style={[styles.jobRow, { backgroundColor: '#4a92f0ff' }]}>
                             <ProfessionIcon size={20} color="#000" />
                             <Text style={[styles.job, { color: '#000', marginLeft: 8 }]}>
                                 {artisan.metier}
@@ -293,6 +293,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 8,
+        padding: 6,
+        borderRadius: 16,
     },
     job: {
         fontSize: 20,

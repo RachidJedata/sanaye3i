@@ -16,7 +16,7 @@ export {
 };
 
 const FavoritesScreen: React.FC = () => {
-    const { favorites } = useTheme(); // ✅ Automatically triggers rerender when favorites change
+    const { favorites } = useTheme(); 
 
     const favArtisans = artisans.filter(a => favorites.includes(a.id));
 
